@@ -26,7 +26,7 @@
         </div>
         <div class="col-8">
             <label for="">Graduated?</label>
-            <input class="form-control" type="boolean" v-model="profileData.graduated" />
+            <input class="" type="checkbox" v-model="profileData.graduated" />
         </div>
         <div class="col-12">
             <label for="">Bio</label>
