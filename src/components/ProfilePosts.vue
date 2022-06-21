@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-11 ms-5 bg-white elevation-3 m-3 ">
         <div class="col-md-12 d-flex justify-content-between px-3">
-            <img class="img-fluid selectable profile-img" :src="profilePost.creator.picture" alt="">
+            <img class="img-fluid selectable profile-img p-2" :src="profilePost.creator.picture" alt="">
             <h4 class="">{{ profilePost.creator.name }} </h4>
             <p class="mb-0">{{ formatDate(profilePost.createdAt) }}</p>
             <i v-if="profilePost.creator.id == account.id" class="mdi mdi-close selectable" @click="deletePost"></i>
@@ -13,6 +13,7 @@
         <div class="text-center">
             <p>{{ profilePost.body }}</p>
         </div>
+
     </div>
 </template>
 

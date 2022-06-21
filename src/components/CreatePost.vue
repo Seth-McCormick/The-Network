@@ -3,7 +3,7 @@
 
 
     <div class="col-10  elevation-3 ms-5">
-        <img class="profile-img" :src="account.picture" alt="">
+        <img class="profile-img p-2" :src="account.picture" alt="">
         <div>
             <label for="" class="form-label"></label>
             <textarea class="form-control" placeholder="Add a Description..." rows="5"

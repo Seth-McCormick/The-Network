@@ -10,5 +10,10 @@ export const AppState = reactive({
   weblinks: [],
   currentPage: 1,
   newerPage: 1,
-  query: ''
+  query: '',
+  olderPage: [],
+  newerPage: [],
+  profileCurrentPage: 1,
+  profileOlderPage: [],
+  profileNewerPage: [],
 })

@@ -4,15 +4,19 @@
         <div class="row justify-content-center mt-4">
             <div class="col-md-8 bg-white elevation-3 ">
                 <div class="bg-img" :style="`background-image: url(${profile.coverImg})`">
-                    <img class="profile-img" :src="profile.picture" alt="">
+                    <img class="profile-img p-1" :src="profile.picture" alt="">
                 </div>
                 <div class="text-center">
-                    <h4 class="text-center">{{ profile.name }}</h4>
+                    <h4 class="text-center">{{ profile.name }} <span v-if="profile.graduated"
+                            class="mdi mdi-account-tie-hat "></span>
+                    </h4>
+
                     <div>
                         <b>{{ profile.email }} | {{ profile.linkedin }} | {{ profile.github }}</b>
 
                     </div>
-                    <b> {{ profile.bio }} | {{ profile.class }} | {{ profile.graduated }}</b>
+                    <b> Class of: {{ profile.class }} </b>
+                    <p>{{ profile.bio }}</p>
 
                 </div>
                 <div v-if="account.id == profile.id" class="d-flex justify-content-end m-3">
@@ -34,11 +38,9 @@
                                         aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <ProfileForm />
+                                    <ProfileForm :editProfile="profile" />
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-success">Confirm</button>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -50,6 +52,12 @@
             <!-- <i class="mdi mdi-arrow-left me-5 selectable" @click="changePage(currentPage - 1)"></i>
             <i class="mdi mdi-arrow-right ms-5 selectable" @click="changePage(currentPage + 1)"></i> -->
 
+        </div>
+        <div class="col-12 d-flex justify-content-between">
+
+            <i class="mdi mdi-arrow-left selectable" @click="profilePreviousPage(currentPage - 1, profileId)">
+            </i>
+            <i class="mdi mdi-arrow-right selectable" @click="profileNextPage(currentPage + 1, profileId)"></i>
         </div>
     </div>
     <WebLink v-for="w in weblinks" :key="w.tall" :weblink="w" />
@@ -94,6 +102,28 @@ export default {
             posts: computed(() => AppState.posts),
             weblinks: computed(() => AppState.weblinks),
             profile: computed(() => AppState.profile),
+
+
+            async profileNextPage(pageNumber, profileId) {
+                try {
+                    await postsService.nextPage(pageNumber, profileId)
+                } catch (error) {
+                    logger.log(error)
+                    Pop.toast(error.message, 'error')
+                }
+
+
+            },
+            async profilePreviousPage(pageNumber, profileId) {
+                try {
+                    await postsService.previousPage(pageNumber, profileId)
+                } catch (error) {
+                    logger.log(error)
+                    Pop.toast(error.message, 'error')
+                }
+
+
+            }
 
             // async changePage(pageNumber) {
             //     try {

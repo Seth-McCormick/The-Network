@@ -1,7 +1,7 @@
 <template>
     <div class="col-md-12 bg-white elevation-3 m-3 ">
         <div class="col-md-12 d-flex justify-content-between px-3">
-            <img class="img-fluid selectable profile-img" :src="post.creator.picture" alt="" @click="goToProfile">
+            <img class="img-fluid selectable profile-img p-2" :src="post.creator.picture" alt="" @click="goToProfile">
             <h4 class="">{{ post.creator.name }} </h4>
             <p class="mb-0">{{ formatDate(post.createdAt) }}</p>
             <i v-if="account.id == post.creator.id" class="mdi mdi-close selectable" @click="deletePost"></i>
@@ -12,7 +12,7 @@
         </div>
         <div class="d-flex justify-content-between px-5">
             <p>{{ post.body }}</p>
-            <i><span class="mdi mdi-heart selectable" @click="likePost"></span> {{ post.__v }}</i>
+            <i><span class="mdi mdi-heart selectable" @click="likePost"></span> {{ post.likeIds.length }}</i>
         </div>
     </div>
 </template>
@@ -42,6 +42,7 @@ export default {
 
             likePost() {
                 try {
+
                     postsService.likePost(props.post.id)
                 } catch (error) {
                     Pop.toast(error.message, 'error')
